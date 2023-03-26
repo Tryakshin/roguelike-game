@@ -21,7 +21,7 @@ class Entity
 }
 class Character : Entity
 {
-    private int _helth;
+    private int _health;
     private int _damage;
 }
 class Player : Character
