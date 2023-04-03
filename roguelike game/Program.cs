@@ -1,4 +1,8 @@
-﻿namespace roguelike_game;
+﻿using static System.Net.Mime.MediaTypeNames;
+using System.Data;
+using System.Threading;
+
+namespace roguelike_game;
 
 internal class Program
 {
@@ -48,12 +52,18 @@ internal class Program
     }
     private static void Main()
     {
+
+        Player.ChooseKind();
+        
         var game = GenerateGame();
+
+        
         while (true)
         {
             game.Map.Draw(game);
             var key = Console.ReadKey(true);
             game.Player.Move(game, key.Key);
+            Thread.SpinWait(1000);
         }
     }
 }
