@@ -15,7 +15,7 @@ internal class Program
         {
             var y = rand.Next(1, maxY);
             var x = rand.Next(1, maxX);
-            if (!set.Contains((y, x)) && y != maxY / 2 && x != maxX / 2)
+            if (!set.Contains((y, x)))
             {
                 set.Add((y, x));
             }
@@ -32,20 +32,27 @@ internal class Program
         var player = new Player(map.Width / 2, map.Height / 2, 100, 10);
         var monsters = new List<Character>();
         var walls = new List<Entity>();
-        var game = new Game(map, player, monsters, walls);
+        var potions = new List<Potion>();
+        var game = new Game(map, player, monsters, walls, potions);
 
         var entitiesCount = map.Width * map.Height / 10;
         var entitiesCoords = GenerateCoords(entitiesCount, map.Width, map.Height);
         var monstersCoords = entitiesCoords.Take(entitiesCoords.Count / 15).ToList();
         var wallCoords = entitiesCoords.Except(monstersCoords).ToList();
-        foreach (var (y, x) in wallCoords)
-        {
-            walls.Add(new Entity(x, y, true,'#'));
-        }
+        var potionCoords = entitiesCoords.Take(entitiesCoords.Count / 10).Except(monstersCoords).ToList();
+
+
         foreach (var (y, x) in monstersCoords)
         {
-            var randomCharacterType = rand.Next(3);
-            monsters.Add(Character.CreateCharacter(x, y, randomCharacterType));
+            monsters.Add(new Character(x, y, rand.Next(1, 50), rand.Next(1, 5)));
+        }
+        foreach (var (y, x) in wallCoords)
+        {
+            walls.Add(new Entity(x, y, true, "■"));
+        }
+        foreach (var (y, x) in potionCoords)
+        {
+            potions.Add(new Potion(x, y, 0, -10));
         }
         return game;
     }
