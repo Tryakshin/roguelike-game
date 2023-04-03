@@ -69,7 +69,7 @@ internal class Program
             game.Map.Draw(game);
             var key = Console.ReadKey(true);
             game.Player.Move(game, key.Key);
-            Thread.SpinWait(1000);
+            
         }
     }
 }
