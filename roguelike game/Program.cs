@@ -1,8 +1,4 @@
-﻿using static System.Net.Mime.MediaTypeNames;
-using System.Data;
-using System.Threading;
-
-namespace roguelike_game;
+﻿namespace roguelike_game;
 
 internal class Program
 {
@@ -24,18 +20,16 @@ internal class Program
         return set.ToList();
     }
 
-
-
     private static Game GenerateGame()
     {
-        Map map = new Map(50, 20);
+        var rand = new Random();
         
 
         Kinds role = Kinds.ChooseKind();
 
-        Player player = new Player(map.Width / 2, map.Height / 2, role);
+        var player = new Player(map.Width / 2, map.Height / 2, role);
 
-        Random rand = new Random();
+        var map = new Map(Console.WindowWidth, Console.WindowHeight);
         var monsters = new List<Character>();
         var walls = new List<Entity>();
         var potions = new List<Potion>();
@@ -49,15 +43,14 @@ internal class Program
         var potionCoords = entitiesCoords.Take(entitiesCoords.Count / 10).Except(monstersCoords).ToList();
 
 
-
-
         foreach (var (y, x) in monstersCoords)
         {
-            monsters.Add(new Character(x, y, rand.Next(1, 5), rand.Next(1, 5)));
+            var randomCharacterType = rand.Next(3);
+            monsters.Add(Character.CreateCharacter(x, y, randomCharacterType));
         }
         foreach (var (y, x) in wallCoords)
         {
-            walls.Add(new Entity(x, y, true, "■"));
+            walls.Add(new Entity(x, y, true, '■'));
         }
         foreach (var (y, x) in potionCoords)
         {
@@ -65,8 +58,6 @@ internal class Program
         }
 
         return game;
-
-
     }
     private static void Main()
     {
@@ -88,11 +79,9 @@ internal class Program
         
         while (true)
         {
-
             game.Map.Draw(game);
             var key = Console.ReadKey(true);
             game.Player.Move(game, key.Key);
-            
         }
     }
 }
