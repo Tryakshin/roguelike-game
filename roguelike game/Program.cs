@@ -34,11 +34,10 @@ internal class Program
         var entitiesCoords = GenerateCoords(entitiesCount, map.Width, map.Height);
         var monstersCoords = entitiesCoords.Take(entitiesCoords.Count / 15).ToList();
         var wallCoords = entitiesCoords.Except(monstersCoords).ToList();
-
-
         foreach (var (y, x) in monstersCoords)
         {
-            monsters.Add(new Character(x, y, rand.Next(1, 50), rand.Next(1, 5)));
+            var randomCharacterType = rand.Next(3);
+            monsters.Add(Character.CreateCharacter(x, y, randomCharacterType));
         }
         foreach (var (y, x) in wallCoords)
         {
