@@ -7,6 +7,7 @@ public class Game
     public readonly List<Character> Monsters;
     public readonly List<Entity> Walls;
     public readonly List<Potion> Potions;
+    
 
     public Game(Map map, Player player, List<Character> monsters, List<Entity> walls, List<Potion> potions)
     {
@@ -15,5 +16,10 @@ public class Game
         Monsters = monsters;
         Walls = walls;
         Potions = potions;
+        
     }
+
+
+
+    
 }
