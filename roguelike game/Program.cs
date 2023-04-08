@@ -24,16 +24,23 @@ internal class Program
         return set.ToList();
     }
 
+
+
     private static Game GenerateGame()
     {
-        var rand = new Random();
+        Map map = new Map(50, 20);
         
-        var map = new Map(Console.WindowWidth, Console.WindowHeight);
-        var player = new Player(map.Width / 2, map.Height / 2, 100, 10);
+
+        Kinds role = Kinds.ChooseKind();
+
+        Player player = new Player(map.Width / 2, map.Height / 2, role);
+
+        Random rand = new Random();
         var monsters = new List<Character>();
         var walls = new List<Entity>();
         var potions = new List<Potion>();
-        var game = new Game(map, player, monsters, walls, potions);
+        var exits = new List<Exit>();
+        Game game = new Game(map, player, monsters, walls, potions);
 
         var entitiesCount = map.Width * map.Height / 10;
         var entitiesCoords = GenerateCoords(entitiesCount, map.Width, map.Height);
@@ -42,9 +49,11 @@ internal class Program
         var potionCoords = entitiesCoords.Take(entitiesCoords.Count / 10).Except(monstersCoords).ToList();
 
 
+
+
         foreach (var (y, x) in monstersCoords)
         {
-            monsters.Add(new Character(x, y, rand.Next(1, 50), rand.Next(1, 5)));
+            monsters.Add(new Character(x, y, rand.Next(1, 5), rand.Next(1, 5)));
         }
         foreach (var (y, x) in wallCoords)
         {
@@ -54,18 +63,19 @@ internal class Program
         {
             potions.Add(new Potion(x, y, 0, -10));
         }
+
         return game;
+
+
     }
     private static void Main()
     {
-
-        Player.ChooseKind();
-        
-        var game = GenerateGame();
-
+        Console.CursorVisible = false;            
+        Game game = GenerateGame();    
         
         while (true)
         {
+
             game.Map.Draw(game);
             var key = Console.ReadKey(true);
             game.Player.Move(game, key.Key);

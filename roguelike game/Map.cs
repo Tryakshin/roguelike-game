@@ -67,6 +67,8 @@ public class Map
             EntitiesList[potion.Y][potion.X] = potion;
            
         }
+
+        
     }
 
     public void Draw(Game game)
@@ -85,6 +87,9 @@ public class Map
             {
                 Console.WriteLine();
             }
+
+            
         }
     }
+
 }
