@@ -28,7 +28,7 @@ internal class Program
     {
         var rand = new Random();
         
-        var map = new Map(Console.WindowWidth, Console.WindowHeight);
+        var map = new Map(50, 20);
         var player = new Player(map.Width / 2, map.Height / 2, 100, 10);
         var monsters = new List<Character>();
         var walls = new List<Entity>();
