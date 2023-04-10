@@ -52,13 +52,17 @@ public class Map
             }
         }
         EntitiesList[game.Player.Y][game.Player.X] = game.Player;
-        foreach (var monster in game.Monsters)
-        {
-            EntitiesList[monster.Y][monster.X] = monster;
-        }
         foreach (var wall in game.Walls)
         {
             EntitiesList[wall.Y][wall.X] = wall;
+        }
+        foreach (var monster in game.Monsters)
+        {
+            if (monster.InVisibleDistance(game.Player))
+            {
+                monster.MoveToEntity(game.Map, game.Player);
+            }
+            EntitiesList[monster.Y][monster.X] = monster;
         }
     }
 

@@ -11,7 +11,7 @@ internal class Program
         {
             var y = rand.Next(1, maxY);
             var x = rand.Next(1, maxX);
-            if (!set.Contains((y, x)))
+            if (!set.Contains((y, x)) && y != maxY / 2 && x != maxX / 2)
             {
                 set.Add((y, x));
             }
@@ -34,14 +34,14 @@ internal class Program
         var entitiesCoords = GenerateCoords(entitiesCount, map.Width, map.Height);
         var monstersCoords = entitiesCoords.Take(entitiesCoords.Count / 15).ToList();
         var wallCoords = entitiesCoords.Except(monstersCoords).ToList();
+        foreach (var (y, x) in wallCoords)
+        {
+            walls.Add(new Entity(x, y, true,'#'));
+        }
         foreach (var (y, x) in monstersCoords)
         {
             var randomCharacterType = rand.Next(3);
             monsters.Add(Character.CreateCharacter(x, y, randomCharacterType));
-        }
-        foreach (var (y, x) in wallCoords)
-        {
-            walls.Add(new Entity(x, y, true,'#'));
         }
         return game;
     }
