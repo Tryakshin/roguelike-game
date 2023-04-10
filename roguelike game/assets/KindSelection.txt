@@ -1,0 +1,12 @@
+                                   /\
+	       	                  /__\  	  /\
+	  /\ 	                 /   /  	 /__\
+	 /__\       	        /   /   	/|__|\ 
+	 |__|(_)               /   /		  ||  |\
+	 /||\ |              </___/> 		 /||\ | \
+	/ || \|            O   /        	/ || \| /
+	  /\  |          /||\_/         	 /  \ |/
+	 /  \             /\ O          	/    \ 
+  Mage: 7♥ 18DMG    Warrior: 15♥ 5DMG     Archer: 10♥ 10DMG
+     Press "1"          Press "2"           Press "3"
+     to choose          to choose           to choose
