@@ -140,8 +140,8 @@ public class Character : Entity
         }
     }
 
-    public void ControlHealth(int health_change)
+    public void ControlHealth(int healthChange)
     {
-        Health += health_change;
+        Health += healthChange;
     }
 }

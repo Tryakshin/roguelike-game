@@ -19,27 +19,25 @@ public class Kinds
         Kinds archer = new(10, 10);
         Kinds mage = new(7, 18);
 
-        Kinds[] kind =
+        var kind = new []
         {
             warrior,
             archer,
             mage,
         };
-
-        int kindNumber;
-
+        
         Console.Write(" 1 - Warrior (Здоровье: 15; Урон: 10) \n 2 - Archer (Здоровье: 10; Урон: 5) \n 3 - Mage (Здоровье: 7; Урон: 3)");
         Console.Write("\n Выберите номер персонажа: ");
-        kindNumber = Convert.ToInt32(Console.ReadLine());
-        while (kindNumber > 3 || kindNumber < 1)
+        var kindNumber = Convert.ToInt32(Console.ReadLine());
+        while (kindNumber is > 3 or < 1)
         {
             Console.Write("Выбран несуществующий номер класса, выберите существующий: ");
             kindNumber = Convert.ToInt32(Console.ReadLine());
 
         }
 
-        Kinds Role = kind[kindNumber];
-        return Role;
+        var role = kind[kindNumber];
+        return role;
 
 
     }

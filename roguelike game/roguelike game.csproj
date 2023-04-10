@@ -7,5 +7,9 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
+  <Target Name="CopyCustomContent" AfterTargets="AfterBuild">
+    <Copy SourceFiles="assets/start.txt" DestinationFolder="$(OutDir)/assets" />
+    <Copy SourceFiles="assets/KindSelection.txt" DestinationFolder="$(OutDir)/assets" />
+  </Target>
 
 </Project>
