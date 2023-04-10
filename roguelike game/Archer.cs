@@ -2,7 +2,7 @@
 
 public class Archer: Kinds
 {
-    public Archer() 
+    public Archer(int health, int damage) : base(health, damage)
     {
         Health = 10;
         Damage = 15;

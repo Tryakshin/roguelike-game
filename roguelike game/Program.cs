@@ -39,7 +39,7 @@ internal class Program
         var monsters = new List<Character>();
         var walls = new List<Entity>();
         var potions = new List<Potion>();
-        var exits = new List<Exit>();
+        
         Game game = new Game(map, player, monsters, walls, potions);
 
         var entitiesCount = map.Width * map.Height / 10;
@@ -70,7 +70,20 @@ internal class Program
     }
     private static void Main()
     {
-        Console.CursorVisible = false;            
+        Console.CursorVisible = false;
+
+        StreamReader start = new StreamReader("C:\\Users\\Danil\\Desktop\\Models\\start.txt");
+        while (!start.EndOfStream)
+        {
+            string s = start.ReadLine();
+
+            Console.WriteLine(s);
+        }
+        start.Close();
+        Console.Write("      Press <Enter> to continue... ");
+        while (Console.ReadKey().Key != ConsoleKey.Enter) { }
+        Console.Clear();
+
         Game game = GenerateGame();    
         
         while (true)
