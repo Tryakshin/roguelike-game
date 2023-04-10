@@ -1,8 +1,4 @@
-﻿using static System.Net.Mime.MediaTypeNames;
-using System.Data;
-using System.Threading;
-
-namespace roguelike_game;
+﻿namespace roguelike_game;
 
 internal class Program
 {
@@ -15,7 +11,7 @@ internal class Program
         {
             var y = rand.Next(1, maxY);
             var x = rand.Next(1, maxX);
-            if (!set.Contains((y, x)))
+            if (!set.Contains((y, x)) && y != maxY / 2 && x != maxX / 2)
             {
                 set.Add((y, x));
             }
@@ -24,40 +20,35 @@ internal class Program
         return set.ToList();
     }
 
-
-
     private static Game GenerateGame()
     {
-        Map map = new Map(50, 20);
+        var rand = new Random();
+
+        var map = new Map(Console.WindowWidth, Console.WindowHeight);
         
-
-        Kinds role = Kinds.ChooseKind();
-
-        Player player = new Player(map.Width / 2, map.Height / 2, role);
-
-        Random rand = new Random();
+        var role = Kinds.ChooseKind();
+        var player = new Player(map.Width / 2, map.Height / 2, role);
         var monsters = new List<Character>();
         var walls = new List<Entity>();
         var potions = new List<Potion>();
-        
-        Game game = new Game(map, player, monsters, walls, potions);
+        var game = new Game(map, player, monsters, walls, potions);
 
         var entitiesCount = map.Width * map.Height / 10;
         var entitiesCoords = GenerateCoords(entitiesCount, map.Width, map.Height);
         var monstersCoords = entitiesCoords.Take(entitiesCoords.Count / 15).ToList();
-        var wallCoords = entitiesCoords.Except(monstersCoords).ToList();
-        var potionCoords = entitiesCoords.Take(entitiesCoords.Count / 10).Except(monstersCoords).ToList();
+        var potionCoords = entitiesCoords.Except(monstersCoords).Take(entitiesCoords.Count / 10).ToList();
+        var wallCoords = entitiesCoords.Except(monstersCoords).Except(potionCoords).ToList();
 
-
+        foreach (var (y, x) in wallCoords)
+        {
+            walls.Add(new Entity(x, y, true, '#'));
+        }
 
 
         foreach (var (y, x) in monstersCoords)
         {
-            monsters.Add(new Character(x, y, rand.Next(1, 5), rand.Next(1, 5)));
-        }
-        foreach (var (y, x) in wallCoords)
-        {
-            walls.Add(new Entity(x, y, true, "■"));
+            var randomCharacterType = rand.Next(3);
+            monsters.Add(Character.CreateCharacter(x, y, randomCharacterType));
         }
         foreach (var (y, x) in potionCoords)
         {
@@ -65,17 +56,15 @@ internal class Program
         }
 
         return game;
-
-
     }
     private static void Main()
     {
         Console.CursorVisible = false;
 
-        StreamReader start = new StreamReader("C:\\Users\\Danil\\Desktop\\Models\\start.txt");
+        var start = new StreamReader(@"assets/start.txt");
         while (!start.EndOfStream)
         {
-            string s = start.ReadLine();
+            var s = start.ReadLine();
 
             Console.WriteLine(s);
         }
@@ -84,15 +73,12 @@ internal class Program
         while (Console.ReadKey().Key != ConsoleKey.Enter) { }
         Console.Clear();
 
-        Game game = GenerateGame();    
-        
+        var game = GenerateGame();
         while (true)
         {
-
             game.Map.Draw(game);
             var key = Console.ReadKey(true);
             game.Player.Move(game, key.Key);
-            
         }
     }
 }
