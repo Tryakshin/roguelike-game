@@ -24,15 +24,15 @@ internal class Program
     {
         var rand = new Random();
 
-        var map = new Map(Console.WindowWidth, Console.WindowHeight);
+        var map = new Map(50, 25);
         
         var role = Kinds.ChooseKind();
         var player = new Player(map.Width / 2, map.Height / 2, role);
         var monsters = new List<Character>();
         var walls = new List<Entity>();
         var potions = new List<Potion>();
-        var game = new Game(map, player, monsters, walls, potions);
-
+        var statusWindow = new StatusWindow(20, 10, 52, 0, player);
+        var game = new Game(map, player, monsters, walls, potions, statusWindow);
         var entitiesCount = map.Width * map.Height / 10;
         var entitiesCoords = GenerateCoords(entitiesCount, map.Width, map.Height);
         var monstersCoords = entitiesCoords.Take(entitiesCoords.Count / 15).ToList();
@@ -54,6 +54,8 @@ internal class Program
         {
             potions.Add(new Potion(x, y, 0, -10));
         }
+
+        statusWindow.Update(player.HP, player.Dmg, game.MonstrsCount(), game.PotionCount());
 
         return game;
     }
@@ -77,6 +79,7 @@ internal class Program
         while (true)
         {
             game.Map.Draw(game);
+            game.StatusWindow.Draw();
             var key = Console.ReadKey(true);
             game.Player.Move(game, key.Key);
         }

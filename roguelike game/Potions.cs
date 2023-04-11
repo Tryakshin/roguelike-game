@@ -17,4 +17,8 @@ public class Potion : Entity
         Symbol = symbol;
         Color = color;
     }
+    public void PotionUse (Player player)
+    {
+
+    }
 }

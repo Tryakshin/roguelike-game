@@ -5,6 +5,7 @@ public class Character : Entity
     protected int Health;
     protected int Damage;
 
+
     public Character(int x, int y, int health, int damage, char symbol = 'M', 
         ConsoleColor color = ConsoleColor.Magenta, bool collision = true)
         : base(x, y, collision, symbol, color)
@@ -140,8 +141,6 @@ public class Character : Entity
         }
     }
 
-    public void ControlHealth(int healthChange)
-    {
-        Health += healthChange;
-    }
+   
+  
 }

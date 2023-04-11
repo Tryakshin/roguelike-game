@@ -15,7 +15,7 @@ public class Kinds
     public static Kinds ChooseKind()
     {
 
-        Kinds warrior = new(15, 5);
+        Kinds warrior = new(15, 10);
         Kinds archer = new(10, 10);
         Kinds mage = new(7, 18);
 
@@ -36,7 +36,7 @@ public class Kinds
 
         }
 
-        var role = kind[kindNumber];
+        var role = kind[kindNumber-1];
         return role;
 
 
