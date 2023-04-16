@@ -21,25 +21,35 @@ public class Kinds
 
         var kind = new []
         {
-            warrior,
-            archer,
             mage,
+            warrior,
+            archer,      
         };
-        
-        Console.Write(" 1 - Warrior (Здоровье: 15; Урон: 10) \n 2 - Archer (Здоровье: 10; Урон: 5) \n 3 - Mage (Здоровье: 7; Урон: 3)");
-        Console.Write("\n Выберите номер персонажа: ");
-        var kindNumber = Convert.ToInt32(Console.ReadLine());
-        while (kindNumber is > 3 or < 1)
+
+        var roles = new StreamReader(@"assets\KindSelection.txt");
+        while (!roles.EndOfStream)
         {
-            Console.Write("Выбран несуществующий номер класса, выберите существующий: ");
-            kindNumber = Convert.ToInt32(Console.ReadLine());
-
+            var s = roles.ReadLine();
+            Console.WriteLine(s);
         }
-
-        var role = kind[kindNumber-1];
-        return role;
+        var kindNumber = Console.ReadLine();
 
 
+        
+        switch (kindNumber)
+        {
+            case "1":
+                int i = Convert.ToInt32(kindNumber);
+                return kind[i - 1];
+            case "2":
+                i = Convert.ToInt32(kindNumber);
+                return kind[i - 1];
+            case "3":
+                i = Convert.ToInt32(kindNumber);
+                return kind[i - 1];
+            default:
+                throw new ArgumentException($"Invalid character type: {kindNumber}");
+        }     
     }
 
 }

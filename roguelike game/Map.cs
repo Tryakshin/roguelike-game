@@ -1,3 +1,6 @@
+using System.Numerics;
+using System.Transactions;
+
 namespace roguelike_game;
 
 public class Map
@@ -13,7 +16,7 @@ public class Map
         EntitiesList = new List<List<Entity>>();
     }
 
-    private void Generate(Game game)
+    private void Generate(Game game, Player player)
     {
         EntitiesList.Clear();
         for (var y = 0; y <= Height; ++y)
@@ -51,11 +54,11 @@ public class Map
                 }
             }
         }
-        EntitiesList[game.Player.Y][game.Player.X] = game.Player;
+        
         foreach (var potion in game.Potions)
         {
             EntitiesList[potion.Y][potion.X] = potion;
-           
+
         }
         foreach (var wall in game.Walls)
         {
@@ -69,11 +72,24 @@ public class Map
             }
             EntitiesList[monster.Y][monster.X] = monster;
         }
+
+
+        EntitiesList[player.Y][player.X] = game.Player;
+
+
+        Entity entity = EntitiesList[player.Y][player.X];
+
+        if (entity.GetType() != typeof(Player) && entity != null)
+        {
+            Game.Fight(player, EntitiesList);
+            EntitiesList[player.Y][player.X] = null;
+
+        }
     }
 
-    public void Draw(Game game)
+    public void Draw(Game game, Player player)
     {
-        Generate(game);
+        Generate(game, player);
         Console.Clear();
         for (var y = 0; y <= Height; ++y)
         {
@@ -89,4 +105,25 @@ public class Map
             }
         }
     }
+
+   /* public bool CheckCoordinates(Player player, Game game)
+    {
+        int playerX = player.X;
+        int playerY = player.Y;
+      
+
+        Entity entity = EntitiesList[playerY][playerX];
+        if (entity == null)
+        {
+            return true;
+        }
+
+        if (entity.GetType() != typeof(Player))
+        {
+            Game.Fight(player, EntitiesList[playerY][playerX] as Character);
+            return false;
+        }
+
+        return true;
+    }*/
 }

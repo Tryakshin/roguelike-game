@@ -5,14 +5,7 @@ public class Player : Character
     private ColisionCheck _colisionCheck = new ColisionCheck();
     private int _money;
     private Kinds _role;
-    public int HP
-    {
-        get => Health; 
-    }
-    public int Dmg
-    {
-        get => Damage;
-    }
+    
 
 
     public Player(int x, int y, Kinds role, char symbol = '@', ConsoleColor color = ConsoleColor.Red,
@@ -20,15 +13,15 @@ public class Player : Character
     {
         _money = money;
         _role = role;
-        void UsePotion(Potion potion)
+       /* void UsePotion(Potion potion)
         {
 
-        }
+        }*/
     }
  
 
     public void Move(Game game, ConsoleKey key)
-    {
+    {   
         if (key == ConsoleKey.UpArrow)
         {
             if (!game.Map.EntitiesList[Y - 1][X].Collision) Y -= 1;
@@ -46,14 +39,7 @@ public class Player : Character
         {
             if (!game.Map.EntitiesList[Y][X + 1].Collision) X += 1;
         }
-    }
-    public void ControlHealth(Potion potion)
-    {
         
     }
-
-
-
-
 }
 

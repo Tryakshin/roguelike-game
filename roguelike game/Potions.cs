@@ -13,7 +13,7 @@ public class Potion : Entity
         Damage = damage;
         X = x;
         Y = y;
-        Collision = true;
+        Collision = false;
         Symbol = symbol;
         Color = color;
     }

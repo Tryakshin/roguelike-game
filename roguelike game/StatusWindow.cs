@@ -51,7 +51,7 @@ namespace roguelike_game
                 Console.Write('║');
             }
             
-            var hp = new StreamReader(@"C:\Users\x9240\source\repos\roguelike game\roguelike game\assets\hp.txt");
+            var hp = new StreamReader(@"assets\hp.txt");
             int cordX = X + 2;
             int cordY = Y + 1;
             while (!hp.EndOfStream)
@@ -64,7 +64,7 @@ namespace roguelike_game
                 cordY++;
             }
 
-            var crip = new StreamReader(@"C:\Users\x9240\source\repos\roguelike game\roguelike game\assets\Slime.txt");
+            var crip = new StreamReader(@"assets\Slime.txt");
             while (!crip.EndOfStream)
             {
 
@@ -75,7 +75,7 @@ namespace roguelike_game
                 cordY++;
             }
 
-            var pt = new StreamReader(@"C:\Users\x9240\source\repos\roguelike game\roguelike game\assets\potion.txt");
+            var pt = new StreamReader(@"assets\potion.txt");
             while (!pt.EndOfStream)
             {
 

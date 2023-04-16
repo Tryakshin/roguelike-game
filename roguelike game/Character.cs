@@ -5,6 +5,15 @@ public class Character : Entity
     protected int Health;
     protected int Damage;
 
+    public int HP
+    {
+        get => Health;
+    }
+    public int Dmg
+    {
+        get => Damage;
+    }
+
 
     public Character(int x, int y, int health, int damage, char symbol = 'M', 
         ConsoleColor color = ConsoleColor.Magenta, bool collision = true)
@@ -18,17 +27,21 @@ public class Character : Entity
         Symbol = symbol;
         Color = color;
     }
-    
+
+    public void ControlHealth(int Changes)
+    {
+        Health-=Changes;
+    }
     public static Character CreateCharacter(int x, int y, int characterType)
     {
         switch (characterType)
         {
             case 0:
-                return new Character(x, y, 50, 5, symbol: 'A');
+                return new Character(x, y, 1, 2, symbol: 'A');
             case 1:
-                return new Character(x, y, 25, 10, symbol: 'B');
+                return new Character(x, y, 2, 3, symbol: 'B');
             case 2:
-                return new Character(x, y, 40, 7, symbol: 'C');
+                return new Character(x, y, 4, 3, symbol: 'C');
             default:
                 throw new ArgumentException($"Invalid character type: {characterType}");
         }
