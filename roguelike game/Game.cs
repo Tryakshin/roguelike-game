@@ -10,10 +10,11 @@ public class Game
     public readonly List<Entity> Walls;
     public readonly List<Potion> Potions;
     public readonly StatusWindow StatusWindow;
+    public readonly List<Entity> Inventory;
 
 
 
-    public Game(Map map, Player player, List<Character> monsters, List<Entity> walls, List<Potion> potions, StatusWindow statusWindow)
+    public Game(Map map, Player player, List<Character> monsters, List<Entity> walls, List<Potion> potions, StatusWindow statusWindow, List<Entity> inventory)
     {
         Map = map;
         Player = player;
@@ -21,7 +22,7 @@ public class Game
         Walls = walls;
         Potions = potions;
         StatusWindow = statusWindow;
-
+        Inventory = inventory;
     }
     public int MonstrsCount()
     {

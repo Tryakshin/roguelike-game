@@ -27,8 +27,9 @@ internal class Program
         var monsters = new List<Character>();
         var walls = new List<Entity>();
         var potions = new List<Potion>();
+        var inventory = new List<Entity>();
         var statusWindow = new StatusWindow(20, 10, 52, 0, player);
-        var game = new Game(map, player, monsters, walls, potions, statusWindow);
+        var game = new Game(map, player, monsters, walls, potions, statusWindow, inventory);
         var entitiesCount = map.Width * map.Height / 10;
         var entitiesCoords = Game.GenerateCoords(entitiesCount, map.Width, map.Height);
         var monstersCoords = entitiesCoords.Take(entitiesCoords.Count / 15).ToList();

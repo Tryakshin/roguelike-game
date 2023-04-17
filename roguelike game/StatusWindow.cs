@@ -86,11 +86,15 @@ namespace roguelike_game
                 cordY++;
             }
             Console.SetCursorPosition(56, 2);
-            Console.WriteLine(_hp);
+            if( _hp <10  )
+            {
+                Console.WriteLine(" {0}",_hp);
+            }
+            else { Console.WriteLine(_hp); }
             Console.SetCursorPosition(62, 2);
             Console.Write("Damage:");
             Console.Write(_damage);
-            Console.SetCursorPosition(58, 6);
+            Console.SetCursorPosition(58, 7);
             Console.WriteLine(_monstrsCount);
             Console.SetCursorPosition(67, 6);
             Console.WriteLine(_potionCount);
