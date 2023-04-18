@@ -28,10 +28,6 @@ public class Game
     {
         return Monsters.Count;
     }
-    public int PotionCount()
-    {
-        return Potions.Count;
-    }
 
     public static List<(int, int)> GenerateCoords(int n, int maxX, int maxY)
     {

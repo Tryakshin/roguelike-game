@@ -59,6 +59,11 @@ public class Map
         {
             EntitiesList[potion.Y][potion.X] = potion;
 
+            if (player.X == potion.X && player.Y == potion.Y)
+            {
+
+            }
+
         }
         foreach (var wall in game.Walls)
         {
@@ -105,6 +110,10 @@ public class Map
             }
         }
     }
+
+    
+
+    
 
    /* public bool CheckCoordinates(Player player, Game game)
     {
