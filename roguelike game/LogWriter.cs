@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.IO;
 
-namespace roguelike_game
+public class LogWriter
 {
-    internal class LogWriter
+    private StreamWriter? writer;
+    
+    public LogWriter(string filePath)
     {
+
     }
 }
