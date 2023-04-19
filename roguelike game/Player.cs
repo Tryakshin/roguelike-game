@@ -8,6 +8,7 @@ public class Player : Character
     private int _money;
     private Kinds _role;
     private int _potionCount;
+    public Inventory inventory = new Inventory(10);
     
    
 
@@ -48,17 +49,19 @@ public class Player : Character
         {
             if (!game.Map.EntitiesList[Y][X + 1].Collision) X += 1;
         }
+
+
         
     }
 
-    public Boolean PickUpPotion(Potion potion)
+    public Boolean PickUpPotion(Potion potion, Map map)
     {
         
         if (colisionCheck.Check(this, potion)) 
         {
 
-            //Invenroty.Add(potion);
-            //map.RemovePotion();
+            inventory.AddItem(potion);
+            map.RemoveSub(potion);
             return true;
             
         }

@@ -1,4 +1,5 @@
 using System.Numerics;
+using System.Security.Cryptography.X509Certificates;
 
 namespace roguelike_game;
 
@@ -6,7 +7,7 @@ public class Game
 {
     public readonly Map Map;
     public readonly Player Player;
-    public readonly List<Character> Monsters;
+    public List<Character> Monsters;
     public readonly List<Entity> Walls;
     public readonly List<Potion> Potions;
     public readonly StatusWindow StatusWindow;
@@ -28,6 +29,12 @@ public class Game
     {
         return Monsters.Count;
     }
+
+    public int PotionCount()
+    {
+        return Potions.Count;
+    }
+
 
     public static List<(int, int)> GenerateCoords(int n, int maxX, int maxY)
     {
@@ -74,13 +81,13 @@ public class Game
         return game;
     }
 
-    public static void Fight(Player character1, List<List<Entity>> EntitiesList)
+    public void Fight(Player character1, Character monster)
     {
-        Character character2 = EntitiesList[character1.Y][character1.X] as Character;
+        Character character2 = monster;
 
 
         int player1Health = character1.HP;
-        int player2Health = character2.HP;
+        int player2Health = monster.HP;
 
         while (player1Health > 0 && player2Health > 0)
         {          
@@ -88,24 +95,27 @@ public class Game
             Character defender = character2;      
             int damage = attacker.Dmg;
             defender.ControlHealth(damage);
-            if (defender.HP <= 0)
+            if (defender.HP == 0)
             {
                 break;
             }
-            Player temp = attacker;
-            attacker = character2 as Player;
-            defender = character1 as Character;
-            damage = attacker.Dmg;
-            defender.ControlHealth(damage);
+
+            attacker = monster as Player;
+            
+            damage = monster.Dmg;
+            character1.ControlHealth(damage);
+            
         }
 
-        if (player1Health > 0)
+        if (character2.HP == 0)
         {
-            Console.WriteLine("Player 1 wins!");
+            
+            Monsters.Remove(monster);
+            
 
-            EntitiesList[character1.Y][character1.X] = null;
+
         }
-        else if (player2Health > 0)
+        else if (character1.HP == 0)
         {
             Console.WriteLine("Player 2 wins!");
         }
@@ -113,9 +123,15 @@ public class Game
         {
             Console.WriteLine("It's a tie!");
         }
+
+        
     }
 
-
+    public void GameOver()
+    {
+        Console.Clear();
+        Console.WriteLine("You Lost!");
+    }
 
 
 

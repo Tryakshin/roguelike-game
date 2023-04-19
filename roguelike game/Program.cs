@@ -36,6 +36,7 @@ internal class Program
         var potionCoords = entitiesCoords.Except(monstersCoords).Take(entitiesCoords.Count / 10).ToList();
         var wallCoords = entitiesCoords.Except(monstersCoords).Except(potionCoords).ToList();
         game.StatusWindow.Update(game.Player.HP, game.Player.Dmg, game.MonstrsCount(), game.PotionCount());
+        
 
         var Play = Game.GenerateGame(rand, map, role, player, monsters, walls, potions, statusWindow, game, entitiesCount, entitiesCoords, monstersCoords, potionCoords, wallCoords);
         while (true)
@@ -47,6 +48,11 @@ internal class Program
             /*player.ControlHealth(10);*/
             /* map.CheckCoordinates(player, game);*/
             game.StatusWindow.Update(game.Player.HP, game.Player.Dmg, game.MonstrsCount(), game.PotionCount());
+            if (game.Player.HP <=0)
+            {
+                game.GameOver();
+                break;
+            }
         }
 
     }

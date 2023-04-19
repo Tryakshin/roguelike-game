@@ -30,18 +30,22 @@ public class Character : Entity
 
     public void ControlHealth(int Changes)
     {
-        Health-=Changes;
+        Health -= Changes;
+        if (Health<0)
+        {
+            Health = 0;
+        }
     }
     public static Character CreateCharacter(int x, int y, int characterType)
     {
         switch (characterType)
         {
             case 0:
-                return new Character(x, y, 1, 2, symbol: 'A');
+                return new Character(x, y, 10, 2, symbol: 'A');
             case 1:
-                return new Character(x, y, 2, 3, symbol: 'B');
+                return new Character(x, y, 12, 3, symbol: 'B');
             case 2:
-                return new Character(x, y, 4, 3, symbol: 'C');
+                return new Character(x, y, 14, 4, symbol: 'C');
             default:
                 throw new ArgumentException($"Invalid character type: {characterType}");
         }

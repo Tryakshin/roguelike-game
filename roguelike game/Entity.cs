@@ -7,6 +7,7 @@ public class Entity
     public char Symbol;
     public ConsoleColor Color;
     public bool Collision;
+   /* abstract void CheckEntity();*/
     
     public Entity(int x, int y, bool collision, char symbol, ConsoleColor color = ConsoleColor.White)
     {
@@ -16,4 +17,11 @@ public class Entity
         Color = color;
         Collision = collision;
     }
+
+   /* abstract void CheckEntity();*/
+    
+
+    
+
 }
+

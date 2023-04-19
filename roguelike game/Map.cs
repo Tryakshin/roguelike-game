@@ -1,4 +1,5 @@
 using System.Numerics;
+using System.Threading;
 using System.Transactions;
 
 namespace roguelike_game;
@@ -76,20 +77,32 @@ public class Map
                 monster.MoveToEntity(game.Map, game.Player);
             }
             EntitiesList[monster.Y][monster.X] = monster;
+            /*if (player.Y == monster.Y && player.X == monster.X)
+            {
+                game.Fight(player, EntitiesList, monster);
+
+
+            }*/
+        }
+
+        for (int i=0; i < game.Monsters.Count(); i++)
+        {
+            var monster = game.Monsters[i];
+            EntitiesList[monster.Y][monster.X] = monster;
+            if (player.Y == monster.Y && player.X == monster.X)
+            {
+                game.Fight(player, monster);
+
+            }
         }
 
 
         EntitiesList[player.Y][player.X] = game.Player;
 
 
-        Entity entity = EntitiesList[player.Y][player.X];
+        
 
-        if (entity.GetType() != typeof(Player) && entity != null)
-        {
-            Game.Fight(player, EntitiesList);
-            EntitiesList[player.Y][player.X] = null;
-
-        }
+        
     }
 
     public void Draw(Game game, Player player)
@@ -109,6 +122,11 @@ public class Map
                 Console.WriteLine();
             }
         }
+    }
+
+    public void RemoveSub(Entity entity)
+    {
+        EntitiesList[entity.X][entity.Y] = null;
     }
 
     
