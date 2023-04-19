@@ -16,9 +16,5 @@ public class Potion : Entity
         Collision = false;
         Symbol = symbol;
         Color = color;
-    }
-    public void PotionUse (Player player)
-    {
-
-    }
+    }   
 }

@@ -77,15 +77,10 @@ public class Map
                 monster.MoveToEntity(game.Map, game.Player);
             }
             EntitiesList[monster.Y][monster.X] = monster;
-            /*if (player.Y == monster.Y && player.X == monster.X)
-            {
-                game.Fight(player, EntitiesList, monster);
 
-
-            }*/
         }
 
-        for (int i=0; i < game.Monsters.Count(); i++)
+        for (int i = 0; i < game.Monsters.Count(); i++)
         {
             var monster = game.Monsters[i];
             EntitiesList[monster.Y][monster.X] = monster;
@@ -95,6 +90,22 @@ public class Map
 
             }
         }
+
+        for (int i = 0; i < game.Potions.Count(); i++)
+        {
+            var potion = game.Potions[i];
+            EntitiesList[potion.Y][potion.X] = potion;
+            if (player.Y == potion.Y && player.X == potion.X)
+            {
+                if (game.Inventory.InventoryCount() < 3)
+                {
+                    game.RemoveItem(potion);
+                }
+                game.Inventory.AddItem(potion);                               
+            }
+        }
+
+
 
 
         EntitiesList[player.Y][player.X] = game.Player;
@@ -124,10 +135,7 @@ public class Map
         }
     }
 
-    public void RemoveSub(Entity entity)
-    {
-        EntitiesList[entity.X][entity.Y] = null;
-    }
+    
 
     
 

@@ -27,7 +27,7 @@ internal class Program
         var monsters = new List<Character>();
         var walls = new List<Entity>();
         var potions = new List<Potion>();
-        var inventory = new List<Entity>();
+        var inventory = new Inventory(3);
         var statusWindow = new StatusWindow(20, 10, 52, 0, player);
         var game = new Game(map, player, monsters, walls, potions, statusWindow, inventory);
         var entitiesCount = map.Width * map.Height / 10;
@@ -35,22 +35,27 @@ internal class Program
         var monstersCoords = entitiesCoords.Take(entitiesCoords.Count / 15).ToList();
         var potionCoords = entitiesCoords.Except(monstersCoords).Take(entitiesCoords.Count / 10).ToList();
         var wallCoords = entitiesCoords.Except(monstersCoords).Except(potionCoords).ToList();
-        game.StatusWindow.Update(game.Player.HP, game.Player.Dmg, game.MonstrsCount(), game.PotionCount());
+        game.StatusWindow.Update(game.Player.HP, game.Player.Dmg, game.MonstrsCount(), game.Inventory.InventoryCount());
         
 
-        var Play = Game.GenerateGame(rand, map, role, player, monsters, walls, potions, statusWindow, game, entitiesCount, entitiesCoords, monstersCoords, potionCoords, wallCoords);
+        var Play = Game.GenerateGame(rand, map, role, player, monsters, walls, potions, inventory, statusWindow, game, entitiesCount, entitiesCoords, monstersCoords, potionCoords, wallCoords);
         while (true)
         {
             game.Map.Draw(game, player);
             game.StatusWindow.Draw();
             var key = Console.ReadKey(true);
-            game.Player.Move(game, key.Key);
+            game.Player.Control(game, key.Key);
             /*player.ControlHealth(10);*/
             /* map.CheckCoordinates(player, game);*/
-            game.StatusWindow.Update(game.Player.HP, game.Player.Dmg, game.MonstrsCount(), game.PotionCount());
-            if (game.Player.HP <=0)
+            game.StatusWindow.Update(game.Player.HP, game.Player.Dmg, game.MonstrsCount(), game.Inventory.InventoryCount());
+            if (game.Player.HP <= 0)
             {
                 game.GameOver();
+                break;
+            }
+            if (game.MonstrsCount() == 0)
+            {
+                game.Win();
                 break;
             }
         }

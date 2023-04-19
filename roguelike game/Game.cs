@@ -1,5 +1,6 @@
 using System.Numerics;
 using System.Security.Cryptography.X509Certificates;
+using System.Threading;
 
 namespace roguelike_game;
 
@@ -11,11 +12,11 @@ public class Game
     public readonly List<Entity> Walls;
     public readonly List<Potion> Potions;
     public readonly StatusWindow StatusWindow;
-    public readonly List<Entity> Inventory;
+    public readonly Inventory Inventory;
 
 
 
-    public Game(Map map, Player player, List<Character> monsters, List<Entity> walls, List<Potion> potions, StatusWindow statusWindow, List<Entity> inventory)
+    public Game(Map map, Player player, List<Character> monsters, List<Entity> walls, List<Potion> potions, StatusWindow statusWindow, Inventory inventory)
     {
         Map = map;
         Player = player;
@@ -30,10 +31,10 @@ public class Game
         return Monsters.Count;
     }
 
-    public int PotionCount()
+    /*public int PotionCount()
     {
         return Potions.Count;
-    }
+    }*/
 
 
     public static List<(int, int)> GenerateCoords(int n, int maxX, int maxY)
@@ -54,10 +55,10 @@ public class Game
         return set.ToList();
     }
 
-    public static Game GenerateGame(Random rand, Map map, Kinds role, Player player, List<Character> monsters, List<Entity> walls, List<Potion> potions,
+    public static Game GenerateGame(Random rand, Map map, Kinds role, Player player, List<Character> monsters, List<Entity> walls, List<Potion> potions, Inventory inventory,
         StatusWindow statusWindow, Game game, int entitiesCount, List<(int, int)> entitiesCoords, List<(int, int)> monstersCoords, List<(int, int)> potionCoords, List<(int, int)> wallCoords)
     {
-        
+
 
         foreach (var (y, x) in wallCoords)
         {
@@ -75,10 +76,24 @@ public class Game
             potions.Add(new Potion(x, y, 0, -10));
         }
 
-       
-        
+
+
 
         return game;
+    }
+
+    public void RemoveItem(Entity entity)
+    {
+        if (entity.GetType() == typeof(Character))
+        {
+            Monsters.Remove(entity as Character);
+        }
+
+        else if (entity.GetType() == typeof(Potion))
+        {
+            Potions.Remove(entity as Potion);
+
+        }
     }
 
     public void Fight(Player character1, Character monster)
@@ -90,28 +105,28 @@ public class Game
         int player2Health = monster.HP;
 
         while (player1Health > 0 && player2Health > 0)
-        {          
+        {
             Player attacker = character1;
-            Character defender = character2;      
+            Character defender = character2;
+
             int damage = attacker.Dmg;
             defender.ControlHealth(damage);
+
             if (defender.HP == 0)
             {
                 break;
             }
 
             attacker = monster as Player;
-            
             damage = monster.Dmg;
             character1.ControlHealth(damage);
-            
         }
 
         if (character2.HP == 0)
         {
-            
-            Monsters.Remove(monster);
-            
+
+
+            RemoveItem(monster);
 
 
         }
@@ -124,7 +139,7 @@ public class Game
             Console.WriteLine("It's a tie!");
         }
 
-        
+
     }
 
     public void GameOver()
@@ -133,6 +148,11 @@ public class Game
         Console.WriteLine("You Lost!");
     }
 
+    public void Win()
+    {
+        Console.Clear();
+        Console.WriteLine("You Won");
+    }
 
 
 

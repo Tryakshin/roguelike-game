@@ -25,17 +25,17 @@ namespace roguelike_game
             }
         }
 
-        public bool RemoveItem(Entity item)
+        public int InventoryCount() { return items.Count; }
+
+        public void RemoveItem()
         {
-            if (items.Contains(item))
+            if (items.Count()==0)
             {
-                items.Remove(item);
-                return true;
+                Console.WriteLine("You do not have any potions left!");
             }
             else
             {
-                Console.WriteLine("Item not found in inventory.");
-                return false;
+                items.RemoveAt(0);
             }
         }
 
