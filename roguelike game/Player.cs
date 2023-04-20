@@ -54,6 +54,7 @@ public class Player : Character
             if (Health + 5 > MaxHP()) Health = MaxHP();
             else ControlHealth(-5);
             game.Inventory.RemoveItem();
+            LogWriter.WriteLog("вы лечитесь");
         }
 
     }

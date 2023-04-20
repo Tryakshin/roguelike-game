@@ -86,8 +86,8 @@ public class Map
             EntitiesList[monster.Y][monster.X] = monster;
             if (player.Y == monster.Y && player.X == monster.X)
             {
-                game.Fight(player, monster);
-
+                game.Fight(player, monster);                
+                LogWriter.WriteLog("бой!");
             }
         }
 

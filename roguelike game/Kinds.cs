@@ -17,7 +17,7 @@ public class Kinds
 
         Kinds warrior = new(15, 5);
         Kinds archer = new(10, 7);
-        Kinds mage = new(1, 10);
+        Kinds mage = new(9, 10);
 
         var kind = new []
         {

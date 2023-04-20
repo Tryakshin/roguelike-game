@@ -13,10 +13,10 @@ public class Game
     public readonly List<Potion> Potions;
     public readonly StatusWindow StatusWindow;
     public readonly Inventory Inventory;
-    private LogWriter Logger;
+    
 
 
-    public Game(Map map, Player player, List<Character> monsters, List<Entity> walls, List<Potion> potions, StatusWindow statusWindow, Inventory inventory, LogWriter _logger)
+    public Game(Map map, Player player, List<Character> monsters, List<Entity> walls, List<Potion> potions, StatusWindow statusWindow, Inventory inventory)
     {
         Map = map;
         Player = player;
@@ -25,7 +25,7 @@ public class Game
         Potions = potions;
         StatusWindow = statusWindow;
         Inventory = inventory;
-        Logger = _logger;
+        
     }
     public int MonstrsCount()
     {
@@ -56,7 +56,7 @@ public class Game
         return set.ToList();
     }
 
-    public static Game GenerateGame(Random rand, Map map, Kinds role, Player player, List<Character> monsters, List<Entity> walls, List<Potion> potions, Inventory inventory, LogWriter logger, 
+    public static Game GenerateGame(Random rand, Map map, Kinds role, Player player, List<Character> monsters, List<Entity> walls, List<Potion> potions, Inventory inventory, 
         StatusWindow statusWindow, Game game, int entitiesCount, List<(int, int)> entitiesCoords, List<(int, int)> monstersCoords, List<(int, int)> potionCoords, List<(int, int)> wallCoords)
     {
 
@@ -126,7 +126,7 @@ public class Game
         if (character2.HP == 0)
         {
 
-            Logger.WriteLog("Вы убили монстра");
+            
             RemoveItem(monster);
 
 
@@ -147,14 +147,14 @@ public class Game
     {
         Console.Clear();
         Console.WriteLine("You Lost!");
-        Logger.WriteLog("Вы проиграли :(");
+        LogWriter.WriteLog("Вы проиграли :(");
     }
 
     public void Win()
     {
         Console.Clear();
         Console.WriteLine("You Won");
-        Logger.WriteLog("Ура! Вы выиграли!");
+        LogWriter.WriteLog("Ура! Вы выиграли!");
     }
 
 

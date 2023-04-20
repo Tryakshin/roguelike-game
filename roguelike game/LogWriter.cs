@@ -1,46 +1,15 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 
 public class LogWriter
 {
-    private StreamWriter writer;
-    
-    public LogWriter(string filePath, bool boolean)
+    public static void WriteLog(string logMessage)
     {
-
-        try
-        {
-            writer = new StreamWriter(filePath, boolean);
-        }
-
-        catch (IOException e)
-        {
-            Console.WriteLine("Произошла ошибка при создании файла для записи лога: " + e.Message);
-        }
-    }
-
-    public void WriteLog(string logMessage)
-    {
-        try
+        string path = "C:\\Users\\sasha\\source\\repos\\roguelike-game\\roguelike game\\roguelike game\\log.txt";
+           
+        using (StreamWriter writer = new StreamWriter(path, true))
         {
             writer.WriteLineAsync(logMessage);
-        }
-
-        catch (IOException e)
-        {
-            Console.WriteLine("Произошла ошибка при записи лога в файл: " + e.Message);
-        }
-    }
-
-    public void Close()
-    {
-        try
-        {
-            writer.Close();
-        }
-
-        catch (IOException e)
-        {
-            Console.WriteLine("Произошла ошибка при закрытии файла для записи лога: " + e.Message);
         }
     }
 }
