@@ -97,7 +97,7 @@ public class Game
         }
     }
 
-    public void Fight(Player character1, Character monster)
+    public void Fight(Player character1, Character monster, LogWriter logWriter)
     {
         Character character2 = monster;
 
@@ -143,7 +143,7 @@ public class Game
 
     }
 
-    public void GameOver()
+    public void GameOver(LogWriter logWriter)
     {
         Console.Clear();
         Console.WriteLine("You Lost!");

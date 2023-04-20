@@ -52,7 +52,7 @@ internal class Program
             game.StatusWindow.Update(game.Player.HP, game.Player.Dmg, game.MonstrsCount(), game.Inventory.InventoryCount());
             if (game.Player.HP <= 0)
             {
-                game.GameOver();
+                game.GameOver(logWriter);
                 break;
             }
             if (game.MonstrsCount() == 0)
