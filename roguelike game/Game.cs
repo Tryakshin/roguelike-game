@@ -153,7 +153,7 @@ public class Game
     public void Win()
     {
         Console.Clear();
-        Console.WriteLine("You Won");
+        Console.WriteLine("You Won!");
         LogWriter.WriteLog("Ура! Вы выиграли!");
     }
 

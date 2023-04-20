@@ -49,17 +49,21 @@ public class Player : Character
         {
             if (!game.Map.EntitiesList[Y][X + 1].Collision) X += 1;
         }
-        if (key == ConsoleKey.P && game.Inventory.InventoryCount() > 0 && Health < MaxHP())
+        if (key == ConsoleKey.P)
         {
-            if (Health + 5 > MaxHP()) Health = MaxHP();
-            else ControlHealth(-5);
-            game.Inventory.RemoveItem();
-            LogWriter.WriteLog("вы лечитесь");
+            if (game.Inventory.InventoryCount() > 0 && Health < MaxHP())
+            {
+                if (Health + 5 > MaxHP()) Health = MaxHP();
+                else ControlHealth(-5);
+                game.Inventory.RemoveItem();
+                LogWriter.WriteLog("¬ы использовали лечебное зелье!");
+
+            }
         }
 
-    }
+        }
 
-    public int MaxHP()
+        public int MaxHP()
     {
         return _role.Health;
     }

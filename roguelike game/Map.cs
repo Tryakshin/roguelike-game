@@ -58,13 +58,7 @@ public class Map
         
         foreach (var potion in game.Potions)
         {
-            EntitiesList[potion.Y][potion.X] = potion;
-
-            if (player.X == potion.X && player.Y == potion.Y)
-            {
-
-            }
-
+            EntitiesList[potion.Y][potion.X] = potion;       
         }
         foreach (var wall in game.Walls)
         {
