@@ -59,6 +59,11 @@ public class Player : Character
                 LogWriter.WriteLog("¬ы использовали лечебное зелье!");
 
             }
+
+            else
+            {
+                LogWriter.WriteLog("Ќевозможно использовать лечебное зелье!");
+            }
         }
 
         }

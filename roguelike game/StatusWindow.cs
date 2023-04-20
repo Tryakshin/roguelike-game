@@ -98,8 +98,6 @@ namespace roguelike_game
             Console.WriteLine(_monstrsCount);
             Console.SetCursorPosition(67, 6);
             Console.WriteLine(_potionCount);
-
-
         }
         public void Update(int playerHP , int playerDmg, int monstrs, int potion)
         {
@@ -107,11 +105,7 @@ namespace roguelike_game
             _damage = playerDmg;
             _monstrsCount = monstrs;
             _potionCount = potion;
-
-
         }
-
-
 
     }
 }

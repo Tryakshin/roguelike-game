@@ -80,8 +80,8 @@ public class Map
             EntitiesList[monster.Y][monster.X] = monster;
             if (player.Y == monster.Y && player.X == monster.X)
             {
-                game.Fight(player, monster);                
-                LogWriter.WriteLog("бой!");
+                game.Fight(player, monster);
+                LogWriter.WriteLog($"Вы вступили в бой! Ваше здоровье после боя: {player.HP}"); 
             }
         }
 
@@ -95,19 +95,12 @@ public class Map
                 {
                     game.RemoveItem(potion);
                 }
-                game.Inventory.AddItem(potion);                               
+                game.Inventory.AddItem(potion);
+                LogWriter.WriteLog($"Вы подобрали лечебное зелье. Всего зелий в наличии: {game.Inventory.InventoryCount()}");
             }
         }
 
-
-
-
         EntitiesList[player.Y][player.X] = game.Player;
-
-
-        
-
-        
     }
 
     public void Draw(Game game, Player player)

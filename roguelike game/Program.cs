@@ -6,8 +6,9 @@ internal class Program
 {
     private static void Main()
     {
-        Console.CursorVisible = false;
 
+        Console.CursorVisible = false;
+        LogWriter.ClearLogs();
         var start = new StreamReader(@"assets/start.txt");
         while (!start.EndOfStream)
         {
@@ -52,7 +53,7 @@ internal class Program
             game.StatusWindow.Update(game.Player.HP, game.Player.Dmg, game.MonstrsCount(), game.Inventory.InventoryCount());
             if (game.Player.HP <= 0)
             {
-                game.GameOver(logWriter);
+                game.GameOver();
                 break;
             }
             if (game.MonstrsCount() == 0)

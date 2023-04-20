@@ -40,12 +40,15 @@ public class Kinds
         {
             case "1":
                 int i = Convert.ToInt32(kindNumber);
+                LogWriter.WriteLog("Выбран класс маг");
                 return kind[i - 1];
             case "2":
                 i = Convert.ToInt32(kindNumber);
+                LogWriter.WriteLog("Выбран класс воин");
                 return kind[i - 1];
             case "3":
                 i = Convert.ToInt32(kindNumber);
+                LogWriter.WriteLog("Выбран класс лучник");
                 return kind[i - 1];
             default:
                 throw new ArgumentException($"Invalid character type: {kindNumber}");
