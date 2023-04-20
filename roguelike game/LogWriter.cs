@@ -5,7 +5,7 @@ public class LogWriter
 {
     public static void WriteLog(string logMessage)
     {
-        string path = "C:\\Users\\Никита\\source\\repos\\roguelike4\\roguelike game\\log.txt";
+        string path = "C:\\Users\\sasha\\source\\repos\\roguelike-game\\roguelike game\\roguelike game\\log.txt";
            
         using (StreamWriter writer = new StreamWriter(path, true))
         {
@@ -15,7 +15,7 @@ public class LogWriter
 
     public static void ClearLogs()
     {
-        string path = "C:\\Users\\Никита\\source\\repos\\roguelike4\\roguelike game\\log.txt";
+        string path = "C:\\Users\\sasha\\source\\repos\\roguelike-game\\roguelike game\\roguelike game\\log.txt";
 
         using (StreamWriter writer = new StreamWriter(path, false))
         {

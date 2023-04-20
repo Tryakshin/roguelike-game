@@ -35,8 +35,8 @@ internal class Program
         var game = new Game(map, player, monsters, walls, potions, statusWindow, inventory);
         var entitiesCount = map.Width * map.Height / 10;
         var entitiesCoords = Game.GenerateCoords(entitiesCount, map.Width, map.Height);
-        var monstersCoords = entitiesCoords.Take(entitiesCoords.Count / 15).ToList();
-        var potionCoords = entitiesCoords.Except(monstersCoords).Take(entitiesCoords.Count / 10).ToList();
+        var monstersCoords = entitiesCoords.Take(entitiesCoords.Count / 7).ToList();
+        var potionCoords = entitiesCoords.Except(monstersCoords).Take(entitiesCoords.Count / 15).ToList();
         var wallCoords = entitiesCoords.Except(monstersCoords).Except(potionCoords).ToList();
         game.StatusWindow.Update(game.Player.HP, game.Player.Dmg, game.MonstrsCount(), game.Inventory.InventoryCount());
         
